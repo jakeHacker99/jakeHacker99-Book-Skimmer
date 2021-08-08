@@ -1,22 +1,21 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Button, Card, Col, Row } from "react-bootstrap";
 
 import GraphQl from "../Assets/fullstackGraphQL.jpg";
 import styled from "styled-components";
 
 const BookSectoin = () => {
   const sida = 124;
+  const id = 124;
+  const history = useHistory();
+  let idPage = `product/${id}`;
+  const goToBookpage = () => {
+    history.push(idPage);
+  };
+
   return (
     <div>
       <Content>
@@ -34,7 +33,11 @@ const BookSectoin = () => {
                 <Card.Text>Sida: {sida} </Card.Text>
                 <Card.Text>Ranking: </Card.Text>
                 <Card.Text>sida: {sida} </Card.Text>
-                <Button variant="primary" className="shu">
+                <Button
+                  variant="primary"
+                  className="shu"
+                  onClick={goToBookpage}
+                >
                   Edit
                 </Button>
               </Col>
