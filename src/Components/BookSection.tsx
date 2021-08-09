@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useHistory } from "react-router-dom";
@@ -6,6 +6,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 
 import GraphQl from "../Assets/fullstackGraphQL.jpg";
 import styled from "styled-components";
+import { UserContext } from "../Context/useContext";
 
 const BookSectoin = () => {
   const sida = 124;
@@ -15,11 +16,85 @@ const BookSectoin = () => {
   const goToBookpage = () => {
     history.push(idPage);
   };
+  const msg = useContext(UserContext);
 
   return (
     <div>
       <Content>
-        <Card style={{ width: "12rem" }}>
+        <Card
+          style={{
+            width: "12rem",
+            display: "flex",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src={GraphQl}
+            style={{ padding: "3rem", width: "100%" }}
+          />
+          <Wrap>
+            <Row>
+              <Col></Col>
+              <Col>
+                <Card.Title>GraphQL </Card.Title>
+                <Card.Text>Sida: {sida} </Card.Text>
+                <Card.Text>Ranking: </Card.Text>
+                <Card.Text>sida: {sida} </Card.Text>
+                <Button
+                  variant="primary"
+                  className="shu"
+                  onClick={goToBookpage}
+                >
+                  Edit
+                </Button>
+              </Col>
+              <Col></Col>
+            </Row>
+          </Wrap>
+        </Card>
+        <Card
+          style={{
+            width: "12rem",
+            display: "flex",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src={GraphQl}
+            style={{ padding: "3rem", width: "100%" }}
+          />
+          <Wrap>
+            <Row>
+              <Col></Col>
+              <Col>
+                <Card.Title>GraphQL </Card.Title>
+                <Card.Text>Sida: {sida} </Card.Text>
+                <Card.Text>Ranking: {msg} </Card.Text>
+                <Card.Text>sida: {sida} </Card.Text>
+                <Button
+                  variant="primary"
+                  className="shu"
+                  onClick={goToBookpage}
+                >
+                  Edit
+                </Button>
+              </Col>
+              <Col></Col>
+            </Row>
+          </Wrap>
+        </Card>
+        <Card
+          style={{
+            width: "12rem",
+            display: "flex",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
           <Card.Img
             variant="top"
             src={GraphQl}
@@ -68,7 +143,7 @@ const Content = styled.div`
     grid-template-columns: repeat(1, minmax(0, 1fr));
     margin-left: auto;
     margin-left: auto;
-    width: 80%;
+    width: 100%;
   }
 `;
 

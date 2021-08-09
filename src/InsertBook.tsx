@@ -10,11 +10,24 @@ import {
   Button,
 } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
-const InsertBook = () => {
+// @ts-ignore
+const InsertBook = ({ props }) => {
   const history = useHistory();
   const AddBook = () => {
     history.push("/");
+  };
+
+  const [title, setTitle] = useState("");
+  const [kategory, setKategory] = useState("");
+  const [page, setPage] = useState("0");
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    const newValue = e.target.value;
+    setTitle(newValue);
+    console.log(newValue);
   };
   return (
     <Container>
@@ -24,7 +37,11 @@ const InsertBook = () => {
         <Row className="g-2">
           <Col xxl>
             <FloatingLabel controlId="Title" label="Title">
-              <Form.Control type="text" placeholder="GraphQl Fullstack" />
+              <Form.Control
+                type="text"
+                placeholder="GraphQl Fullstack"
+                onChange={handleChange}
+              />
             </FloatingLabel>
           </Col>
           <Col xxl>
@@ -57,7 +74,7 @@ const InsertBook = () => {
           <Col></Col>
           <Col>
             <Button variant="dark" onClick={AddBook}>
-              Done
+              {props}
             </Button>
           </Col>
           <Col></Col>
