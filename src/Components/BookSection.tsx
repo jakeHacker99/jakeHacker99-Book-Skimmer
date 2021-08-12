@@ -1,23 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
-import GraphQl from "../Assets/fullstackGraphQL.jpg";
+import thinkJava from "../Assets/thinkJava.png";
+
 import styled from "styled-components";
 import { UserContext } from "../Context/useContext";
+import { getBooks as book } from "../Server";
 
 const BookSectoin = () => {
-  const sida = 124;
-  const id = 124;
   const history = useHistory();
-  let idPage = `product/${id}`;
-  const goToBookpage = () => {
-    history.push(idPage);
-  };
-  const msg = useContext(UserContext);
 
+  const goToBookpage = () => {
+    history.push("/book/:id");
+  };
+
+  const msg = useContext(UserContext);
+  const getBooks = book();
   return (
     <div>
       <Content>
@@ -31,95 +32,65 @@ const BookSectoin = () => {
         >
           <Card.Img
             variant="top"
-            src={GraphQl}
-            style={{ padding: "3rem", width: "100%" }}
+            src={thinkJava}
+            style={{ padding: "3rem", width: "190px" }}
           />
           <Wrap>
             <Row>
               <Col></Col>
               <Col>
-                <Card.Title>GraphQL </Card.Title>
-                <Card.Text>Sida: {sida} </Card.Text>
-                <Card.Text>Ranking: </Card.Text>
-                <Card.Text>sida: {sida} </Card.Text>
+                <Card.Text></Card.Text>
+                <Card.Text></Card.Text>
                 <Button
-                  variant="primary"
+                  variant="dark"
                   className="shu"
-                  onClick={goToBookpage}
+                  onClick={() => console.log("shu katt")}
                 >
-                  Edit
+                  Add book
                 </Button>
               </Col>
               <Col></Col>
             </Row>
           </Wrap>
         </Card>
-        <Card
-          style={{
-            width: "12rem",
-            display: "flex",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Card.Img
-            variant="top"
-            src={GraphQl}
-            style={{ padding: "3rem", width: "100%" }}
-          />
-          <Wrap>
-            <Row>
-              <Col></Col>
-              <Col>
-                <Card.Title>GraphQL </Card.Title>
-                <Card.Text>Sida: {sida} </Card.Text>
-                <Card.Text>Ranking: {msg} </Card.Text>
-                <Card.Text>sida: {sida} </Card.Text>
-                <Button
-                  variant="primary"
-                  className="shu"
-                  onClick={goToBookpage}
-                >
-                  Edit
-                </Button>
-              </Col>
-              <Col></Col>
-            </Row>
-          </Wrap>
-        </Card>
-        <Card
-          style={{
-            width: "12rem",
-            display: "flex",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <Card.Img
-            variant="top"
-            src={GraphQl}
-            style={{ padding: "3rem", width: "100%" }}
-          />
-          <Wrap>
-            <Row>
-              <Col></Col>
-              <Col>
-                <Card.Title>GraphQL </Card.Title>
-                <Card.Text>Sida: {sida} </Card.Text>
-                <Card.Text>Ranking: </Card.Text>
-                <Card.Text>sida: {sida} </Card.Text>
-                <Button
-                  variant="primary"
-                  className="shu"
-                  onClick={goToBookpage}
-                >
-                  Edit
-                </Button>
-              </Col>
-              <Col></Col>
-            </Row>
-          </Wrap>
-        </Card>
+
+        {/* @ts-ignore */}
+
+        {Object.keys(getBooks).map((sida, id, title) => {
+          return (
+            <Card
+              style={{
+                width: "12rem",
+                display: "flex",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              key={id}
+            >
+              <Card.Img
+                variant="top"
+                src={thinkJava}
+                style={{ padding: "4rem", width: "200px" }}
+              />
+              <Wrap>
+                <Row>
+                  <Col></Col>
+                  <Col>
+                    <Card.Text>point: {id} </Card.Text>
+                    <Card.Text>{title} </Card.Text>
+                    <Card.Text>sida: {sida} </Card.Text>
+                    <Link to={"/book/" + id}>
+                      <Button variant="primary" className="shu">
+                        Edit
+                      </Button>
+                    </Link>
+                  </Col>
+                  <Col></Col>
+                </Row>
+              </Wrap>
+            </Card>
+          );
+        })}
       </Content>
     </div>
   );
@@ -131,7 +102,7 @@ const Content = styled.div`
   display: grid;
   grid-gap: 25px;
   gap: 25px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   @media (max-width: 962px) and (min-width: 452px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));

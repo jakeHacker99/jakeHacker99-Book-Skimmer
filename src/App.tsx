@@ -1,14 +1,15 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import Header from "./Components/Header";
 import Leaderboard from "./Components/Leaderboard";
 import BookSection from "./Components/BookSection";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import InsertBook from "./InsertBook";
+import InsertBook from "./Components/InsertBook";
 import { UserContext } from "./Context/useContext";
 
 function App() {
-  const [value, setValue] = useState("tja");
+  const [value, setValue] = useState("0");
   const providerValue = useMemo(() => [value, setValue], [value, setValue]);
+
   return (
     // @ts-ignore
     <UserContext.Provider value={providerValue}>
@@ -21,8 +22,8 @@ function App() {
               <Leaderboard />
               <BookSection />
             </Route>
-            <Route exact path="/product/:id">
-              <InsertBook props={providerValue} />
+            <Route path={"/book/:id"}>
+              <InsertBook />
             </Route>
           </Switch>
         </Router>
