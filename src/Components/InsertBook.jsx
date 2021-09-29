@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
-import { UserContext } from "../Context/useContext";
+import AppContext from "./AppContext";
 import { useContext } from "react";
 
 const InsertBook = () => {
@@ -19,17 +19,11 @@ const InsertBook = () => {
   const AddBook = () => {
     history.push("/");
   };
-  // @ts-ignore
-  const [value, setValue] = useContext(UserContext);
 
-  const [title, setTitle] = useState("");
-  const [kategory, setKategory] = useState("");
-  const [page, setPage] = useState("0");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e) => {
     e.preventDefault();
     const newValue = e.target.value;
-    setValue(newValue);
   };
   return (
     <Container>

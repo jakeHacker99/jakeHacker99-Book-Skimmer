@@ -7,18 +7,20 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 import thinkJava from "../Assets/thinkJava.png";
 
 import styled from "styled-components";
-import { UserContext } from "../Context/useContext";
-import { getBooks as book } from "../Server";
+import AppContext from "./AppContext";
 
 const BookSectoin = () => {
   const history = useHistory();
+  const {book1, book2,book3} = useContext(AppContext);
+  const {value} = useContext(AppContext);
+
+  const allBooks = [book1, book2, book3];
 
   const goToBookpage = () => {
     history.push("/book/:id");
   };
 
-  const msg = useContext(UserContext);
-  const getBooks = book();
+  const msg = useContext(AppContext);
   return (
     <div>
       <Content>
@@ -54,9 +56,8 @@ const BookSectoin = () => {
           </Wrap>
         </Card>
 
-        {/* @ts-ignore */}
 
-        {Object.keys(getBooks).map((sida, id, title) => {
+        {allBooks.map((book) => {
           return (
             <Card
               style={{
@@ -65,21 +66,21 @@ const BookSectoin = () => {
                 marginLeft: "auto",
                 marginRight: "auto",
               }}
-              key={id}
+              key={book.id}
             >
               <Card.Img
                 variant="top"
-                src={thinkJava}
+                src={book.image}
                 style={{ padding: "4rem", width: "200px" }}
               />
               <Wrap>
                 <Row>
                   <Col></Col>
                   <Col>
-                    <Card.Text>point: {id} </Card.Text>
-                    <Card.Text>{title} </Card.Text>
-                    <Card.Text>sida: {sida} </Card.Text>
-                    <Link to={"/book/" + id}>
+                    <Card.Text>point: {book.points} </Card.Text>
+                    <Card.Text>{book.title} </Card.Text>
+                    <Card.Text>sida: {book.page} </Card.Text>
+                    <Link to={`/book/${book.id}`}>
                       <Button variant="primary" className="shu">
                         Edit
                       </Button>
@@ -91,7 +92,9 @@ const BookSectoin = () => {
             </Card>
           );
         })}
+
       </Content>
+
     </div>
   );
 };
