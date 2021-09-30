@@ -1,11 +1,18 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Header = () => (
-  <>
+import React from 'react'
+import { useHistory } from "react-router";
+
+const Header = () => {
+  const history = useHistory();
+  return (
+    <div>
+
+      
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">📑 </Navbar.Brand>
+        <Navbar.Brand onClick={() => history.push("/")}>📑 </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -25,7 +32,9 @@ const Header = () => (
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  </>
-);
+      
+    </div>
+  )
+}
 
-export default Header;
+export default Header

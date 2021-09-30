@@ -14,23 +14,23 @@ function App() {
   const [value, setValue] = useState("shu bre");
   const [book1, setBook1] = useState({
     id: 0,
-    points: "12",
+    points: 4,
     title: "jakob med grabbarna",
-    page: "12s",
+    page: "12",
     image: GraphQl
   })
   const [book2, setBook2] = useState({
     id: 1,
-    points: "0",
+    points: 5,
     title: " grabbarna",
-    page: "15s",
+    page: "15",
     image: Javadata
   })
   const [book3, setBook3] = useState({
     id:2,
-    points: "82",
+    points: 17,
     title: " med ",
-    page: "320s",
+    page: "320",
     image: thinkjava
   })
   

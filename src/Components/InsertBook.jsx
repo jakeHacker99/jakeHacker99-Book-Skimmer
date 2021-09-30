@@ -16,15 +16,70 @@ import { useContext } from "react";
 
 const InsertBook = () => {
   const history = useHistory();
+
+  const {book1, setBook1,book2, setBook2, book3, setBook3} = useContext(AppContext)
+  
   const AddBook = () => {
+    
     history.push("/");
   };
+
+
 
 
   const handleChange = (e) => {
     e.preventDefault();
     const newValue = e.target.value;
   };
+   const handleTitle = (e) => {
+     e.preventDefault();
+     const currentTitle = e.target.value;
+
+
+     const lengthOfURL = window.location.href.length-1;
+     const selectedBookId = window.location.href[lengthOfURL]
+     
+
+     if(selectedBookId =="0" ){
+     setBook1( {...book1, title: currentTitle})
+       
+     }else if(selectedBookId ==="1"){
+      setBook2( {...book2, title: currentTitle})
+
+     }else if(selectedBookId ==="2"){
+      setBook3( {...book3, title: currentTitle})
+     }else{
+       alert("book with id:", selectedBookId, " doesn't exist 🎢 ")
+     }
+    
+  }
+  
+
+   const handlePage = (e) => {
+    e.preventDefault();
+    const currentPage = e.target.value;
+
+
+    const lengthOfURL = window.location.href.length-1;
+    const selectedBookId = window.location.href[lengthOfURL]
+    const pages =  parseInt(currentPage);
+    const points = Math.round(pages/3)
+    
+
+    if(selectedBookId =="0" ){
+    setBook1( {...book1, page: currentPage, points: points})
+      
+    }else if(selectedBookId ==="1"){
+     setBook2( {...book2, page: currentPage,points: points})
+
+    }else if(selectedBookId ==="2"){
+     setBook3( {...book3, page: currentPage, points:points } )
+    }else{
+      alert("book with id:", selectedBookId, " doesn't exist 🎢 ")
+    }
+    
+  }
+  
   return (
     <Container>
       <Wrap>
@@ -36,30 +91,19 @@ const InsertBook = () => {
               <Form.Control
                 type="text"
                 placeholder="GraphQl Fullstack"
-                onChange={handleChange}
+                onChange={handleTitle}
               />
             </FloatingLabel>
           </Col>
           <Col xxl>
             <FloatingLabel controlId="Sida" label="Sida ">
-              <Form.Control type="text" placeholder="sida 7" />
+              <Form.Control type="text" placeholder="sida 7" onChange={handlePage } />
             </FloatingLabel>
           </Col>
         </Row>
 
         <Row className="g-2" style={{ marginTop: "30px" }}>
-          <Col xxl>
-            <FloatingLabel controlId="Rating" label="Fler Val Alternativ">
-              <Form.Select aria-label="Floating label select example">
-                <option>Kategori</option>
-                <option value="IT">IT</option>
-                <option value="Deckare">Deckare</option>
-                <option value="Skönliteratur">Skönliteratur</option>
-                <option value="Fantasi">Fantasi</option>
-                <option value="Övrigt">Annat</option>
-              </Form.Select>
-            </FloatingLabel>
-          </Col>
+
           <Col xxl>
             <FloatingLabel controlId="Bild" label="Bild länkaddres">
               <Form.Control type="text" placeholder="http://hacker.com" />
@@ -69,7 +113,7 @@ const InsertBook = () => {
         <Row style={{ marginTop: "30px" }}>
           <Col></Col>
           <Col>
-            <Button variant="dark" onClick={AddBook}>
+            <Button variant="dark" onClick={() => history.push("/")}>
               done
             </Button>
           </Col>
