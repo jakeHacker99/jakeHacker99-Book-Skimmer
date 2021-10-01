@@ -17,7 +17,7 @@ import { useContext } from "react";
 const InsertBook = () => {
   const history = useHistory();
 
-  const {book1, setBook1,book2, setBook2, book3, setBook3} = useContext(AppContext)
+  const {book1, setBook1,book2, setBook2, book3, setBook3 , book4, setBook4, book5, setBook5, book6, setBook6, book7, setBook7, book8, setBook8, book9, setBook9 } = useContext(AppContext)
   
   const AddBook = () => {
     
@@ -48,8 +48,39 @@ const InsertBook = () => {
 
      }else if(selectedBookId ==="2"){
       setBook3( {...book3, title: currentTitle})
+
+
+     }else if(selectedBookId ==="3"){
+      setBook4( {...book4, title: currentTitle})
+
+
+     }else if(selectedBookId ==="4"){
+      setBook5( {...book5, title: currentTitle})
+
+
+     }else if(selectedBookId ==="5"){
+      setBook6( {...book6, title: currentTitle})
+
+
+     }else if(selectedBookId ==="6"){
+      setBook7( {...book7, title: currentTitle})
+
+
+     }else if(selectedBookId ==="7"){
+      setBook7( {...book7, title: currentTitle})
+
+
+     }else if(selectedBookId ==="8"){
+      setBook8( {...book8, title: currentTitle})
+
+     }else if(selectedBookId ==="9"){
+      setBook9( {...book9, title: currentTitle})
+
+
+
+
      }else{
-       alert("book with id:", selectedBookId, " doesn't exist 🎢 ")
+       alert("can't impl impl current book 🎢🎢 ")
      }
     
   }
@@ -74,6 +105,29 @@ const InsertBook = () => {
 
     }else if(selectedBookId ==="2"){
      setBook3( {...book3, page: currentPage, points:points } )
+
+
+    }else if(selectedBookId ==="4"){
+      setBook5( {...book5, page: currentPage, points:points})
+
+
+     }else if(selectedBookId ==="5"){
+      setBook6( {...book6, page: currentPage, points:points})
+
+
+     }else if(selectedBookId ==="6"){
+      setBook7( {...book7, page: currentPage, points:points})
+
+
+     }else if(selectedBookId ==="7"){
+      setBook7( {...book7, page: currentPage, points:points})
+
+
+     }else if(selectedBookId ==="8"){
+      setBook8( {...book8, page: currentPage, points:points})
+
+     }else if(selectedBookId ==="9"){
+      setBook9( {...book9, page: currentPage, points:points})
     }else{
       alert("can't impl impl current book 🎢 ")
     }
@@ -95,6 +149,30 @@ const InsertBook = () => {
 
     }else if(selectedBookId ==="2"){
      setBook3( {...book3, image: currentImageURl } )
+
+     
+    }else if(selectedBookId ==="4"){
+      setBook5( {...book5, image: currentImageURl})
+
+
+     }else if(selectedBookId ==="5"){
+      setBook6( {...book6, image: currentImageURl})
+
+
+     }else if(selectedBookId ==="6"){
+      setBook7( {...book7, image: currentImageURl})
+
+
+     }else if(selectedBookId ==="7"){
+      setBook7( {...book7, image: currentImageURl})
+
+
+     }else if(selectedBookId ==="8"){
+      setBook8( {...book8, image: currentImageURl})
+
+     }else if(selectedBookId ==="9"){
+      setBook9( {...book9, image: currentImageURl})
+
     }else{
       alert("can't impl impl current book 🎢 ")
     }

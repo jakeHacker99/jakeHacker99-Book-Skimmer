@@ -5,22 +5,34 @@ import { Link, useHistory } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 
 import thinkJava from "../Assets/thinkJava.png";
+import addBook from "../Assets/addBook.png";
 
 import styled from "styled-components";
 import AppContext from "./AppContext";
 
 const BookSectoin = () => {
   const history = useHistory();
-  const {book1, book2,book3} = useContext(AppContext);
-  const {value} = useContext(AppContext);
 
-  const allBooks = [book1, book2, book3];
+
+  const {bookCount, setBookCount}= useContext(AppContext)
+  const {book1, book2,book3,book4,book5, book6,book7, book8,book9  } = useContext(AppContext);
+
+
+
+  const allBooks = [book1, book2, book3,book4,book5, book6,book7, book8,book9];
 
   const goToBookpage = () => {
     history.push("/book/:id");
   };
 
-  const msg = useContext(AppContext);
+
+   const handleAdd = () => {
+     let nextCount = bookCount +1;
+     if(nextCount >=10) return -1;
+     setBookCount(nextCount)
+  }
+  
+
   return (
     <div>
       <Content>
@@ -34,7 +46,7 @@ const BookSectoin = () => {
         >
           <Card.Img
             variant="top"
-            src={thinkJava}
+            src={addBook}
             style={{ padding: "3rem", width: "190px" }}
           />
           <Wrap>
@@ -43,13 +55,14 @@ const BookSectoin = () => {
               <Col>
                 <Card.Text></Card.Text>
                 <Card.Text></Card.Text>
+                <Link to={`/book/${bookCount}`}>
                 <Button
                   variant="dark"
-                  className="shu"
-                  onClick={() => console.log("shu katt")}
+                  onClick={handleAdd}
                 >
                   Add book
                 </Button>
+                </Link>
               </Col>
               <Col></Col>
             </Row>
@@ -58,39 +71,43 @@ const BookSectoin = () => {
 
 
         {allBooks.map((book) => {
-          return (
-            <Card
-              style={{
-                width: "12rem",
-                display: "flex",
-                marginLeft: "auto",
-                marginRight: "auto",
-              }}
-              key={book.id}
-            >
-              <Card.Img
-                variant="top"
-                src={book.image}
-                style={{ padding: "4rem", width: "200px" }}
-              />
-              <Wrap>
-                <Row>
-                  <Col></Col>
-                  <Col>
-                    <Card.Text>point: {book.points} </Card.Text>
-                    <Card.Text>{book.title} </Card.Text>
-                    <Card.Text>sida: {book.page} </Card.Text>
-                    <Link to={`/book/${book.id}`}>
-                      <Button variant="primary" className="shu">
-                        Edit
-                      </Button>
-                    </Link>
-                  </Col>
-                  <Col></Col>
-                </Row>
-              </Wrap>
-            </Card>
-          );
+          return book.title !=="" ?
+          <>
+                <Card
+                style={{
+                  width: "12rem",
+                  display: "flex",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                key={book.id}
+              >
+                <Card.Img
+                  variant="top"
+                  src={book.image}
+                  style={{ padding: "4rem", width: "200px" }}
+                />
+                <Wrap>
+                  <Row>
+                    <Col></Col>
+                    <Col>
+                      <Card.Text>point: {book.points} </Card.Text>
+                      <Card.Text>{book.title} </Card.Text>
+                      <Card.Text>sida: {book.page} </Card.Text>
+                      <Link to={`/book/${book.id}`}>
+                        <Button variant="primary" className="shu">
+                          Edit
+                        </Button>
+                      </Link>
+                    </Col>
+                    <Col></Col>
+                  </Row>
+                </Wrap>
+              </Card>
+              </>
+              : (null)
+
+
         })}
 
       </Content>

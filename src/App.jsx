@@ -12,6 +12,7 @@ import Javadata from "../src/Assets/thinkJava.png";
 
 function App() {
   const [value, setValue] = useState("shu bre");
+  const [bookCount, setBookCount] = useState(4);
   const [book1, setBook1] = useState({
     id: 0,
     points: 4,
@@ -33,8 +34,54 @@ function App() {
     page: "320",
     image: thinkjava
   })
+
+
+  const [book4, setBook4] = useState({
+    id: 3,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  })
+
+  const [book5, setBook5] = useState({
+    id:4,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  })
+  const [book6, setBook6] = useState({
+    id:5,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  }) 
+   const [book7, setBook7] = useState({
+    id:6,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  }) 
+   const [book8, setBook8] = useState({
+    id:7,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  })
+    const [book9, setBook9] = useState({
+    id:8,
+    points: 0,
+    title: "",
+    page: "",
+    image: ""
+  }) 
+
   
-  const providerValue = useMemo(() => ({value, setValue, book1, setBook1, book2, setBook2, book3, setBook3}), [value, setValue, book1, setBook1, book2, setBook2, book3, setBook3]);
+  const providerValue = useMemo(() => ({value, setValue, book1, setBook1, book2, setBook2, book3, setBook3, setBook4,book4, setBook5, book5,book6, setBook6, book7, setBook7, book8, setBook8, book9, setBook9, bookCount, setBookCount}), [value, setValue, book1, setBook1, book2, setBook2, book3, setBook3, setBook4,book4, setBook5, book5,book6, setBook6, book7, setBook7, book8, setBook8, book9, setBook9,bookCount, setBookCount]);
 
   return (
     // @ts-ignore
