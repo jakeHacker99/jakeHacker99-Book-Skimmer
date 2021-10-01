@@ -75,7 +75,28 @@ const InsertBook = () => {
     }else if(selectedBookId ==="2"){
      setBook3( {...book3, page: currentPage, points:points } )
     }else{
-      alert("book with id:", selectedBookId, " doesn't exist 🎢 ")
+      alert("can't impl impl current book 🎢 ")
+    }
+    
+  }
+   const handleImage = (e) => {
+    e.preventDefault();
+    const currentImageURl = e.target.value;
+
+
+    const lengthOfURL = window.location.href.length-1;
+    const selectedBookId = window.location.href[lengthOfURL]
+
+    if(selectedBookId =="0" ){
+    setBook1( {...book1, image: currentImageURl})
+      
+    }else if(selectedBookId ==="1"){
+     setBook2( {...book2, image: currentImageURl})
+
+    }else if(selectedBookId ==="2"){
+     setBook3( {...book3, image: currentImageURl } )
+    }else{
+      alert("can't impl impl current book 🎢 ")
     }
     
   }
@@ -106,7 +127,7 @@ const InsertBook = () => {
 
           <Col xxl>
             <FloatingLabel controlId="Bild" label="Bild länkaddres">
-              <Form.Control type="text" placeholder="http://hacker.com" />
+              <Form.Control type="text" placeholder="http://hacker.com"  onChange={handleImage}  alt="image" />
             </FloatingLabel>
           </Col>
         </Row>
