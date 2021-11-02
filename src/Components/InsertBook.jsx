@@ -15,170 +15,248 @@ import AppContext from "./AppContext";
 import { useContext } from "react";
 
 const InsertBook = () => {
+  var today = new Date();
   const history = useHistory();
 
-  const {book1, setBook1,book2, setBook2, book3, setBook3 , book4, setBook4, book5, setBook5, book6, setBook6, book7, setBook7, book8, setBook8, book9, setBook9 } = useContext(AppContext)
-  
+  const {
+    book1,
+    setBook1,
+    book2,
+    setBook2,
+    book3,
+    setBook3,
+    book4,
+    setBook4,
+    book5,
+    setBook5,
+    book6,
+    setBook6,
+    book7,
+    setBook7,
+    book8,
+    setBook8,
+    book9,
+    setBook9,
+  } = useContext(AppContext);
+
   const AddBook = () => {
-    
     history.push("/");
   };
-
-
-
 
   const handleChange = (e) => {
     e.preventDefault();
     const newValue = e.target.value;
   };
-   const handleTitle = (e) => {
-     e.preventDefault();
-     const currentTitle = e.target.value;
+  const handleTitle = (e) => {
+    e.preventDefault();
+    const currentTitle = e.target.value;
 
+    const lengthOfURL = window.location.href.length - 1;
+    const selectedBookId = window.location.href[lengthOfURL];
 
-     const lengthOfURL = window.location.href.length-1;
-     const selectedBookId = window.location.href[lengthOfURL]
-     
+    if (selectedBookId == "0") {
+      const {lastUpdate} = book1;
+      let previousDates = lastUpdate;
+      let currentDate = today.getDate() + "/" + (today.getMonth()+ 1) + "/" + today.getFullYear() +" - " +  today.getHours()+ ":" + today.getMinutes()
 
-     if(selectedBookId =="0" ){
-     setBook1( {...book1, title: currentTitle})
-       
-     }else if(selectedBookId ==="1"){
-      setBook2( {...book2, title: currentTitle})
-
-     }else if(selectedBookId ==="2"){
-      setBook3( {...book3, title: currentTitle})
-
-
-     }else if(selectedBookId ==="3"){
-      setBook4( {...book4, title: currentTitle})
-
-
-     }else if(selectedBookId ==="4"){
-      setBook5( {...book5, title: currentTitle})
-
-
-     }else if(selectedBookId ==="5"){
-      setBook6( {...book6, title: currentTitle})
-
-
-     }else if(selectedBookId ==="6"){
-      setBook7( {...book7, title: currentTitle})
-
-
-     }else if(selectedBookId ==="7"){
-      setBook7( {...book7, title: currentTitle})
-
-
-     }else if(selectedBookId ==="8"){
-      setBook8( {...book8, title: currentTitle})
-
-     }else if(selectedBookId ==="9"){
-      setBook9( {...book9, title: currentTitle})
-
-
-
-
-     }else{
-       alert("can't impl impl current book 🎢🎢 ")
-     }
-    
-  }
+       let updateList = lastUpdate.concat(previousDates, currentDate);
+      setBook1({
+        ...book1,
+        title: currentTitle,
+lastUpdate:  updateList
+      });
+      console.log(book1);
+      
+    } else if (selectedBookId === "1") {
+      setBook2({
+        ...book2,
+        title: currentTitle,
   
+      });
+      console.log(book2);
 
-   const handlePage = (e) => {
+    } else if (selectedBookId === "2") {
+      setBook3({
+        ...book3,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book3);
+
+    } else if (selectedBookId === "3") {
+      setBook4({
+        ...book4,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book4);
+    } else if (selectedBookId === "4") {
+      setBook5({
+        ...book5,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book5);
+
+    } else if (selectedBookId === "5") {
+      setBook6({
+        ...book6,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book6);
+
+    } else if (selectedBookId === "6") {
+      setBook7({
+        ...book7,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book7);
+
+    } else if (selectedBookId === "7") {
+      setBook7({
+        ...book7,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book8);
+
+    } else if (selectedBookId === "8") {
+      setBook8({
+        ...book8,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+      console.log(book9);
+
+    } else if (selectedBookId === "9") {
+      setBook9({
+        ...book9,
+        title: currentTitle,
+        lastUpdate: [
+          today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+        ],
+      });
+    } else {
+      alert("can't impl impl current book 🎢🎢 ");
+    }
+  };
+
+  const handlePage = (e) => {
     e.preventDefault();
     const currentPage = e.target.value;
 
+    const lengthOfURL = window.location.href.length - 1;
+    const selectedBookId = window.location.href[lengthOfURL];
+    const pages = parseInt(currentPage);
+    const points = Math.round(pages / 3);
 
-    const lengthOfURL = window.location.href.length-1;
-    const selectedBookId = window.location.href[lengthOfURL]
-    const pages =  parseInt(currentPage);
-    const points = Math.round(pages/3)
-    
-
-    if(selectedBookId =="0" ){
-    setBook1( {...book1, page: currentPage, points: points})
-      
-    }else if(selectedBookId ==="1"){
-     setBook2( {...book2, page: currentPage,points: points})
-
-    }else if(selectedBookId ==="2"){
-     setBook3( {...book3, page: currentPage, points:points } )
-
-
-    }else if(selectedBookId ==="4"){
-      setBook5( {...book5, page: currentPage, points:points})
-
-
-     }else if(selectedBookId ==="5"){
-      setBook6( {...book6, page: currentPage, points:points})
-
-
-     }else if(selectedBookId ==="6"){
-      setBook7( {...book7, page: currentPage, points:points})
-
-
-     }else if(selectedBookId ==="7"){
-      setBook7( {...book7, page: currentPage, points:points})
-
-
-     }else if(selectedBookId ==="8"){
-      setBook8( {...book8, page: currentPage, points:points})
-
-     }else if(selectedBookId ==="9"){
-      setBook9( {...book9, page: currentPage, points:points})
-    }else{
-      alert("can't impl impl current book 🎢 ")
+    if (selectedBookId == "0") {
+      setBook1({ ...book1, page: currentPage, points: points });
+    } else if (selectedBookId === "1") {
+      setBook2({ ...book2, page: currentPage, points: points });
+    } else if (selectedBookId === "2") {
+      setBook3({ ...book3, page: currentPage, points: points });
+    } else if (selectedBookId === "4") {
+      setBook5({ ...book5, page: currentPage, points: points });
+    } else if (selectedBookId === "5") {
+      setBook6({ ...book6, page: currentPage, points: points });
+    } else if (selectedBookId === "6") {
+      setBook7({ ...book7, page: currentPage, points: points });
+    } else if (selectedBookId === "7") {
+      setBook7({ ...book7, page: currentPage, points: points });
+    } else if (selectedBookId === "8") {
+      setBook8({ ...book8, page: currentPage, points: points });
+    } else if (selectedBookId === "9") {
+      setBook9({ ...book9, page: currentPage, points: points });
+    } else {
+      alert("can't impl impl current book 🎢 ");
     }
-    
-  }
-   const handleImage = (e) => {
+  };
+  const handleImage = (e) => {
     e.preventDefault();
     const currentImageURl = e.target.value;
 
+    const lengthOfURL = window.location.href.length - 1;
+    const selectedBookId = window.location.href[lengthOfURL];
 
-    const lengthOfURL = window.location.href.length-1;
-    const selectedBookId = window.location.href[lengthOfURL]
-
-    if(selectedBookId =="0" ){
-    setBook1( {...book1, image: currentImageURl})
-      
-    }else if(selectedBookId ==="1"){
-     setBook2( {...book2, image: currentImageURl})
-
-    }else if(selectedBookId ==="2"){
-     setBook3( {...book3, image: currentImageURl } )
-
-     
-    }else if(selectedBookId ==="4"){
-      setBook5( {...book5, image: currentImageURl})
-
-
-     }else if(selectedBookId ==="5"){
-      setBook6( {...book6, image: currentImageURl})
-
-
-     }else if(selectedBookId ==="6"){
-      setBook7( {...book7, image: currentImageURl})
-
-
-     }else if(selectedBookId ==="7"){
-      setBook7( {...book7, image: currentImageURl})
-
-
-     }else if(selectedBookId ==="8"){
-      setBook8( {...book8, image: currentImageURl})
-
-     }else if(selectedBookId ==="9"){
-      setBook9( {...book9, image: currentImageURl})
-
-    }else{
-      alert("can't impl impl current book 🎢 ")
+    if (selectedBookId == "0") {
+      setBook1({ ...book1, image: currentImageURl });
+    } else if (selectedBookId === "1") {
+      setBook2({ ...book2, image: currentImageURl });
+    } else if (selectedBookId === "2") {
+      setBook3({ ...book3, image: currentImageURl });
+    } else if (selectedBookId === "4") {
+      setBook5({ ...book5, image: currentImageURl });
+    } else if (selectedBookId === "5") {
+      setBook6({ ...book6, image: currentImageURl });
+    } else if (selectedBookId === "6") {
+      setBook7({ ...book7, image: currentImageURl });
+    } else if (selectedBookId === "7") {
+      setBook7({ ...book7, image: currentImageURl });
+    } else if (selectedBookId === "8") {
+      setBook8({ ...book8, image: currentImageURl });
+    } else if (selectedBookId === "9") {
+      setBook9({ ...book9, image: currentImageURl });
+    } else {
+      alert("can't impl impl current book 🎢 ");
     }
+  };
+  const handleDate = (e) => {
+    e.preventDefault();
+
+    const lengthOfURL = window.location.href.length - 1;
+    const selectedBookId = window.location.href[lengthOfURL];
+
+    if (selectedBookId == "0") {
+      const {lastUpdate} = book1;
+
+      setBook1({ ...book1,     lastUpdate:   [{...lastUpdate},
+        today.getDate() + "/" + today.getMonth() + "-" + today.getFullYear(),
+      ] });
+    } else if (selectedBookId === "1") {
+      
+      setBook2({ ...book2  });
+    } else if (selectedBookId === "2") {
+      setBook3({ ...book3  });
+    } else if (selectedBookId === "4") {
+      setBook5({ ...book5  });
+    } else if (selectedBookId === "5") {
+      setBook6({ ...book6  });
+    } else if (selectedBookId === "6") {
+      setBook7({ ...book7  });
+    } else if (selectedBookId === "7") {
+      setBook7({ ...book7  });
+    } else if (selectedBookId === "8") {
+      setBook8({ ...book8  });
+    } else if (selectedBookId === "9") {
+      setBook9({ ...book9 });
+    } else {
+      alert("can't impl impl current book 🎢 ");
+    }
+
+    console.log(book1.lastUpdate)
+
+    history.push("/")
     
   }
   
+
   return (
     <Container>
       <Wrap>
@@ -196,23 +274,31 @@ const InsertBook = () => {
           </Col>
           <Col xxl>
             <FloatingLabel controlId="Sida" label="Sida ">
-              <Form.Control type="text" placeholder="sida 7" onChange={handlePage } />
+              <Form.Control
+                type="text"
+                placeholder="sida 7"
+                onChange={handlePage}
+              />
             </FloatingLabel>
           </Col>
         </Row>
 
         <Row className="g-2" style={{ marginTop: "30px" }}>
-
           <Col xxl>
             <FloatingLabel controlId="Bild" label="Bild länkaddres">
-              <Form.Control type="text" placeholder="http://hacker.com"  onChange={handleImage}  alt="image" />
+              <Form.Control
+                type="text"
+                placeholder="http://hacker.com"
+                onChange={handleImage}
+                alt="image"
+              />
             </FloatingLabel>
           </Col>
         </Row>
         <Row style={{ marginTop: "30px" }}>
           <Col></Col>
           <Col>
-            <Button variant="dark" onClick={() => history.push("/")}>
+            <Button variant="dark" onClick={handleDate}>
               done
             </Button>
           </Col>

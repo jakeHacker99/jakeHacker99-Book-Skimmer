@@ -6,6 +6,7 @@ import { Button, Card, Col, Row } from "react-bootstrap";
 
 import thinkJava from "../Assets/thinkJava.png";
 import addBook from "../Assets/addBook.png";
+import lookUp from "../Assets/lookup.png"
 
 import styled from "styled-components";
 import AppContext from "./AppContext";
@@ -31,6 +32,8 @@ const BookSectoin = () => {
      if(nextCount >=10) return -1;
      setBookCount(nextCount)
   }
+
+  
   
 
   return (
@@ -64,7 +67,73 @@ const BookSectoin = () => {
                 </Button>
                 </Link>
               </Col>
+              <Col>
+              </Col>
+            </Row>
+          </Wrap>
+        </Card>
+        <Card
+          style={{
+            width: "12rem",
+            display: "flex",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src={lookUp}
+            style={{ padding: "3rem", width: "190px" }}
+          />
+          <Wrap>
+            <Row>
               <Col></Col>
+              <Col>
+                <Card.Text></Card.Text>
+                <Card.Text></Card.Text>
+                <Link to={`/search`}>
+                <Button
+                  variant="dark"
+                >
+                  Word search
+                </Button>
+                </Link>
+              </Col>
+              <Col>
+              </Col>
+            </Row>
+          </Wrap>
+        </Card>
+        <Card
+          style={{
+            width: "12rem",
+            display: "flex",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Card.Img
+            variant="top"
+            src={addBook}
+            style={{ padding: "3rem", width: "190px" }}
+          />
+          <Wrap>
+            <Row>
+              <Col></Col>
+              <Col>
+                <Card.Text></Card.Text>
+                <Card.Text></Card.Text>
+                <Link to={`/book/${bookCount}`}>
+                <Button
+                  variant="dark"
+                  onClick={handleAdd}
+                >
+                  Add book
+                </Button>
+                </Link>
+              </Col>
+              <Col>
+              </Col>
             </Row>
           </Wrap>
         </Card>
