@@ -8,9 +8,11 @@ import AppContext from "./Components/AppContext"
 import GraphQl from "../src/Assets/fullstackGraphQL.jpg";
 import thinkjava from "../src/Assets/javaData.jpg";
 import Javadata from "../src/Assets/thinkJava.png";
+import WordSearch from "../src/Components/WordSearch"
 
 
 function App() {
+
   const [value, setValue] = useState("shu bre");
   const [bookCount, setBookCount] = useState(4);
   const [book1, setBook1] = useState({
@@ -18,21 +20,29 @@ function App() {
     points: 4,
     title: "jakob med grabbarna",
     page: "12",
-    image: GraphQl
+    image: GraphQl,
+    lastUpdate: []
+
+
   })
   const [book2, setBook2] = useState({
     id: 1,
     points: 5,
     title: " grabbarna",
     page: "15",
-    image: Javadata
+    image: Javadata,
+    lastUpdate: []
+
+
   })
   const [book3, setBook3] = useState({
     id:2,
     points: 17,
     title: " med ",
     page: "320",
-    image: thinkjava
+    image: thinkjava,
+    lastUpdate: []
+
   })
 
 
@@ -41,7 +51,10 @@ function App() {
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: []
+
+
   })
 
   const [book5, setBook5] = useState({
@@ -49,35 +62,47 @@ function App() {
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: ""
+
   })
   const [book6, setBook6] = useState({
     id:5,
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: []
+
+
   }) 
    const [book7, setBook7] = useState({
     id:6,
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: []
+
+
   }) 
    const [book8, setBook8] = useState({
     id:7,
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: []
+
   })
     const [book9, setBook9] = useState({
     id:8,
     points: 0,
     title: "",
     page: "",
-    image: ""
+    image: "",
+    lastUpdate: []
+
   }) 
 
   
@@ -96,6 +121,9 @@ function App() {
             </Route>
             <Route path={"/book/:id"}>
               <InsertBook />
+            </Route>
+            <Route path={"/search"}>
+              <WordSearch />
             </Route>
           </Switch>
         </Router>
