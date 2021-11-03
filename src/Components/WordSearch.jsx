@@ -21,8 +21,11 @@ const WordSearch = () => {
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [searchHit, setSearchHit] = useState();
-
+  const [searchHit, setSearchHit] = useState({});
+  const [reset, setReset] = useState(false)
+const [ex, setEx] = useState("")
+const [def, setDef] = useState("")
+const [err, setErr] = useState([])
   var API_KEY= process.env.REACT_APP_SECRET_KEY;
   var API_HOST= process.env.REACT_APP_DOMAIN_NAME;
 
@@ -41,19 +44,23 @@ const WordSearch = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
+
     setSearch(e.target.value);
   };
 
   useEffect(() => {
     axios
-      .request(options)
+      .request(  options)
       .then(function (response) {
-        console.log(response.data);
+        setEx(response.data.list[0].example)
+        setDef(response.data.list[0].definition)
+        setSearchHit(response.data.list[0])
       })
       .catch(function (error) {
-        console.error(error);
+        console.error(error.message);
+        setErr(error.message)
       });
-  }, [clicked]);
+  }, [clicked, setSearch]);
 
   return (
     <div>
@@ -65,7 +72,6 @@ const WordSearch = () => {
             <Col xxl>
               <FloatingLabel controlId="Title" label="Word">
                 <Form.Control
-                  type="text"
                   placeholder={search}
                   onChange={handleSearch}
                 />
@@ -82,23 +88,50 @@ const WordSearch = () => {
                   Search
                   <SearchIcon />
                 </button>
-                <button
-                  onClick={() => {
-                    console.log(search)
-                  }}
-                  style={{ margin: "auto" }}
-                >
+                <button onClick={() => {
+                  setEx("")
+                  setDef("")
+                  setReset(!reset)
+                  setErr("")
+                  
+                }}  style= {{margin:'auto'}} >
                   reset
                 </button>
+ 
+              </div>
+              <div>
+    
               </div>
             </Col>
           </Row>
 
           <Row className="g-2" style={{ marginTop: "30px" }}>
-            <Col xxl></Col>
+            <Col xxl>
+                
+{
+  def ?
+                  <ul  >
+                  <li style={{marginBottom:'30px'}} >definition : {def}  </li>
+                  <li>example  : {ex}  </li>
+         
+                </ul>: null
+                
+}
+{
+  err!=='Network Error'&& err.includes('undefined') && !def ?
+  <ul>
+
+  <li>{err} </li>
+  </ul>:
+  null
+}
+
+
+
+       
+            </Col>
           </Row>
           <Row style={{ marginTop: "30px" }}>
-            <Col></Col>
             <Col>
               <Button variant="dark" onClick={() => history.push("/")}>
                 done
