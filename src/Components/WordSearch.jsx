@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios"
-
-
+import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -17,133 +15,104 @@ import {
   Button,
 } from "react-bootstrap";
 import { useState } from "react";
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from "@material-ui/icons/Search";
 const WordSearch = () => {
-    const history = useHistory();
-    const [search, setSearch] = useState("")
-    const [clicked, setClicked] = useState(false)
-    const [searchHit, setSearchHit] = useState({})
-    const [def, setDef] = useState("")
-    const [ex, setEx] = useState("")
-    const [err, setErr] = useState(false)
+  
+  const history = useHistory();
+  const [search, setSearch] = useState("");
+  const [clicked, setClicked] = useState(false);
+  const [searchHit, setSearchHit] = useState();
 
-var options = {
-  method: 'GET',
-  url: 'https://mashape-community-urban-dictionary.p.rapidapi.com/define',
-  params: {term: `${search}`},
-  headers: {
-    'x-rapidapi-host': 'mashape-community-urban-dictionary.p.rapidapi.com',
-    'x-rapidapi-key': '411ca65608mshbac7a5999aa31bfp1b9e03jsn142ee5674f64'
-  },
-  mode: 'no-cors'
+  var API_KEY= process.env.REACT_APP_SECRET_KEY;
+  var API_HOST= process.env.REACT_APP_DOMAIN_NAME;
+
+
+
+  const options = {
+    method: "GET",
+    url: "https://mashape-community-urban-dictionary.p.rapidapi.com/define",
+    params: { term: `${search}` },
+    headers: {
+      "x-rapidapi-host": API_HOST,
+      "x-rapidapi-key": API_KEY,
+    },
+    mode: "no-cors",
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }, [clicked]);
+
+  return (
+    <div>
+      <Container>
+        <Wrap>
+          <h2>Search for definition</h2>
+
+          <Row className="g-2">
+            <Col xxl>
+              <FloatingLabel controlId="Title" label="Word">
+                <Form.Control
+                  type="text"
+                  placeholder={search}
+                  onChange={handleSearch}
+                />
+              </FloatingLabel>
+            </Col>
+            <Col xxl>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <button
+                  onClick={() => {
+                    setSearch(search);
+                    setClicked(!clicked);
+                  }}
+                >
+                  Search
+                  <SearchIcon />
+                </button>
+                <button
+                  onClick={() => {
+                    console.log(search)
+                  }}
+                  style={{ margin: "auto" }}
+                >
+                  reset
+                </button>
+              </div>
+            </Col>
+          </Row>
+
+          <Row className="g-2" style={{ marginTop: "30px" }}>
+            <Col xxl></Col>
+          </Row>
+          <Row style={{ marginTop: "30px" }}>
+            <Col></Col>
+            <Col>
+              <Button variant="dark" onClick={() => history.push("/")}>
+                done
+              </Button>
+            </Col>
+            <Col></Col>
+          </Row>
+        </Wrap>
+      </Container>
+    </div>
+  );
 };
 
-     const handleSearch = (e) => {
-         e.preventDefault();
-         setSearch(e.target.value);
-    }
-
-
-    useEffect(() => {
-      axios.request(options).then(function (response) {
-        setSearchHit(response.data.list[0])
-        setDef(response.data.list[0].definition)
-        setEx(response.data.list[0].example)
-        console.log(searchHit);
-      }).catch(function (error) {
-        console.error(error);
-        setErr(true)
-      });
-      
-    }, [clicked])
-
-    return (
-        <div>
-            <Container>
-      <Wrap>
-        <h2>Search for definition</h2>
-
-        <Row className="g-2">
-          <Col xxl>
-            <FloatingLabel controlId="Title" label="Title">
-              <Form.Control
-                type="text"
-                placeholder="GraphQl Fullstack"
-                onChange={handleSearch}
-              />
-            </FloatingLabel>
-          </Col>
-          <Col xxl  >
-            <div onClick={() => {
-              setSearch(search)
-              setClicked(true)
-              
-            }}   style={{display: "flex", flexDirection:"row", }}>
-            <button >
-    Search
-    <SearchIcon/>
-            </button>
-
-
-
-<button onClick={() => {console.log("reset")
-setSearch("")
-setErr(false)
-setClicked(false)
-
-}} style={{marginLeft:"auto"}} >Reset</button>
-</div>
-
-
-          </Col>
-        </Row>
-
-        <Row className="g-2" style={{ marginTop: "30px" }}>
-
-          <Col xxl>
-              
-                <div >
-                  {
-                    err && clicked ? 
-                    <li>  word {search} wasn't found! 🤑  </li>:null
-                    
-                  }
-         
-         <div>
-                    {!err && clicked?
-
-                          <ul>
-                          <li> def: {def} </li>
-                          <li style={{marginTop:'50px'}}> ex: {ex} </li>
-                          
-                      </ul>
-                      :
-                      null
-                  }
-         </div>
-                </div>
-                
-
-          </Col>
-        </Row>
-        <Row style={{ marginTop: "30px" }}>
-          <Col></Col>
-          <Col>
-            <Button variant="dark" onClick={() => history.push("/")}>
-              done
-            </Button>
-          </Col>
-          <Col></Col>
-        </Row>
-      </Wrap>
-    </Container>
-            
-        </div>
-    )
-}
-
-export default WordSearch
-
+export default WordSearch;
 
 const Wrap = styled.div`
   display: block;
